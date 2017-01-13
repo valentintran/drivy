@@ -228,7 +228,6 @@ for(var i=0; i<rentals.length; i++) {
     rentals[i].price = DurationPrice(Duration(rentals[i].pickupDate, rentals[i].returnDate),rentals[i].carId) + DistancePrice(rentals[i].distance,rentals[i].carId);
     }
 }
-0
 
 Price(); //Call the function Price
 console.log(cars);
