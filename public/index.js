@@ -165,6 +165,74 @@ var rentalModifications = [{
   'pickupDate': '2015-12-05'
 }];
 
+function dateDiff(date1, date2){
+    var diff = {}
+    var tmp = date2 - date1;
+    tmp = Math.floor(tmp/1000);
+    diff.sec = tmp % 60;
+    tmp = Math.floor((tmp-diff.sec)/60);
+    diff.min = tmp % 60;
+    tmp = Math.floor((tmp-diff.min)/60);
+    diff.hour = tmp % 24;
+    tmp = Math.floor((tmp-diff.hour)/24);
+    diff.day = tmp;
+    return diff;
+}
+function Duration(pickupDate, returnDate) {
+var date1 = Date.parse(pickupDate);
+var date2 = Date.parse(returnDate);
+var result = dateDiff(date1,date2);
+return result.day + 1;
+}
+
+function DurationPrice(days, carId) {
+var pricePerDay=0;
+switch (carId) {
+    case 'p306':
+        pricePerDay = cars[0].pricePerDay;
+        break;
+    case 'rr-sport':
+        pricePerDay = cars[1].pricePerDay;
+        break;
+    case 'p-boxster':
+        pricePerDay = cars[2].pricePerDay;
+        break;
+}
+if(carId == 'p306'){
+
+}
+else if(carId == ){
+
+}
+else{
+
+}
+var result = days * pricePerDay;
+return result;
+}
+
+function DistancePrice(distance, carId) {
+var pricePerKm=0;
+if(carId == 'p306'){
+    pricePerKm = cars[0].pricePerKm;
+}
+else if(carId == 'rr-sport'){
+    pricePerKm = cars[1].pricePerKm;
+}
+else{
+    pricePerKm = cars[2].pricePerKm;
+}
+var result = distance * pricePerKm;
+return result;
+}
+
+function Price() {
+for(var i=0; i<rentals.length; i++) {
+    rentals[i].price = DurationPrice(Duration(rentals[i].pickupDate, rentals[i].returnDate),rentals[i].carId) + DistancePrice(rentals[i].distance,rentals[i].carId);
+    }
+}
+
+Price(); //Call the function Price
 console.log(cars);
 console.log(rentals);
 console.log(actors);
