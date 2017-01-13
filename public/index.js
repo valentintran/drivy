@@ -240,10 +240,19 @@ for(var i=0; i<rentals.length; i++) {
     }
 }
 
-
+//Calculate the Deductible
+function Deductible() {
+for(var i=0; i<rentals.length; i++) {
+    if(rentals[i].options.deductibleReduction == true){
+        rentals[i].price = rentals[i].price + 4 * Duration(rentals[i].pickupDate, rentals[i].returnDate);
+        }
+    }
+}
 
 Price(); //Call the function Price
 Commission(); //Call the function Commission
+Deductible(); //Call the function Deductible
+
 console.log(cars);
 console.log(rentals);
 console.log(actors);
