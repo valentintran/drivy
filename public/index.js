@@ -196,10 +196,10 @@ for(var i=0; i<cars.length; i++){
         pricePerDay = cars[i].pricePerDay
         }
         else if(days > 1 && days <= 4){
-        pricePerDay = cars[i].pricePerDay * 10/100;
+        pricePerDay = cars[i].pricePerDay * 90/100;
         }
         else if(days > 4 && days < 10){
-        pricePerDay = cars[i].pricePerDay * 30/100;
+        pricePerDay = cars[i].pricePerDay * 70/100;
         }
         else{
         pricePerDay = cars[i].pricePerDay * 50/100;
@@ -229,7 +229,21 @@ for(var i=0; i<rentals.length; i++) {
     }
 }
 
+//Calculate the commissions
+function Commission() {
+var comm;
+for(var i=0; i<rentals.length; i++) {
+    comm = rentals[i].price * 30/100;
+    rentals[i].commission.insurance = comm * 50/100;
+    rentals[i].commission.assistance = Duration(rentals[i].pickupDate, rentals[i].returnDate) * 1;
+    rentals[i].commission.drivy = comm - rentals[i].commission.insurance - rentals[i].commission.assistance;
+    }
+}
+
+
+
 Price(); //Call the function Price
+Commission(); //Call the function Commission
 console.log(cars);
 console.log(rentals);
 console.log(actors);
