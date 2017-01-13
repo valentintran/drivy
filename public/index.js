@@ -192,7 +192,18 @@ function DurationPrice(days, carId) {
 var pricePerDay=0;
 for(var i=0; i<cars.length; i++){
     if(carId == cars[i].id){
-    pricePerDay = cars[i].pricePerDay;
+        if(days == 1){
+        pricePerDay = cars[i].pricePerDay
+        }
+        else if(days > 1 && days <= 4){
+        pricePerDay = cars[i].pricePerDay * 10/100;
+        }
+        else if(days > 4 && days < 10){
+        pricePerDay = cars[i].pricePerDay * 30/100;
+        }
+        else{
+        pricePerDay = cars[i].pricePerDay * 50/100;
+        }
     }
 }
 var result = days * pricePerDay;
@@ -217,11 +228,7 @@ for(var i=0; i<rentals.length; i++) {
     rentals[i].price = DurationPrice(Duration(rentals[i].pickupDate, rentals[i].returnDate),rentals[i].carId) + DistancePrice(rentals[i].distance,rentals[i].carId);
     }
 }
-
-//Calculate the new price with the discount
-function NewPrice(){
-
-}
+0
 
 Price(); //Call the function Price
 console.log(cars);
