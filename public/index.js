@@ -165,6 +165,7 @@ var rentalModifications = [{
   'pickupDate': '2015-12-05'
 }];
 
+//calculate the difference between two dates (days, hours, min, sec)
 function dateDiff(date1, date2){
     var diff = {}
     var tmp = date2 - date1;
@@ -178,6 +179,7 @@ function dateDiff(date1, date2){
     diff.day = tmp;
     return diff;
 }
+//Calculate the duration of a rental
 function Duration(pickupDate, returnDate) {
 var date1 = Date.parse(pickupDate);
 var date2 = Date.parse(returnDate);
@@ -185,44 +187,40 @@ var result = dateDiff(date1,date2);
 return result.day + 1;
 }
 
+//Calculate the price for a duration
 function DurationPrice(days, carId) {
 var pricePerDay=0;
-switch (carId) {
-    case 'p306':
-        pricePerDay = cars[0].pricePerDay;
-        break;
-    case 'rr-sport':
-        pricePerDay = cars[1].pricePerDay;
-        break;
-    case 'p-boxster':
-        pricePerDay = cars[2].pricePerDay;
-        break;
+for(var i=0; i<cars.length; i++){
+    if(carId == cars[i].id){
+    pricePerDay = cars[i].pricePerDay;
+    }
 }
 var result = days * pricePerDay;
 return result;
 }
 
+//Calculate the price for a distance
 function DistancePrice(distance, carId) {
 var pricePerKm=0;
-switch (carId) {
-    case 'p306':
-        pricePerKm = cars[0].pricePerKm;
-        break;
-    case 'rr-sport':
-        pricePerKm = cars[1].pricePerKm;
-        break;
-    case 'p-boxster':
-        pricePerKm = cars[2].pricePerKm;
-        break;
+for(var i=0; i<cars.length; i++){
+    if(carId == cars[i].id){
+    pricePerKm = cars[i].pricePerKm;
+    }
 }
 var result = distance * pricePerKm;
 return result;
 }
 
+//Calculate the final price for all the rentals
 function Price() {
 for(var i=0; i<rentals.length; i++) {
     rentals[i].price = DurationPrice(Duration(rentals[i].pickupDate, rentals[i].returnDate),rentals[i].carId) + DistancePrice(rentals[i].distance,rentals[i].carId);
     }
+}
+
+//Calculate the new price with the discount
+function NewPrice(){
+
 }
 
 Price(); //Call the function Price
