@@ -198,29 +198,22 @@ switch (carId) {
         pricePerDay = cars[2].pricePerDay;
         break;
 }
-if(carId == 'p306'){
-
-}
-else if(carId == ){
-
-}
-else{
-
-}
 var result = days * pricePerDay;
 return result;
 }
 
 function DistancePrice(distance, carId) {
 var pricePerKm=0;
-if(carId == 'p306'){
-    pricePerKm = cars[0].pricePerKm;
-}
-else if(carId == 'rr-sport'){
-    pricePerKm = cars[1].pricePerKm;
-}
-else{
-    pricePerKm = cars[2].pricePerKm;
+switch (carId) {
+    case 'p306':
+        pricePerKm = cars[0].pricePerKm;
+        break;
+    case 'rr-sport':
+        pricePerKm = cars[1].pricePerKm;
+        break;
+    case 'p-boxster':
+        pricePerKm = cars[2].pricePerKm;
+        break;
 }
 var result = distance * pricePerKm;
 return result;
