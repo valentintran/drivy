@@ -249,9 +249,33 @@ for(var i=0; i<rentals.length; i++) {
     }
 }
 
+//Pay each actor for one rental and debit the driver
+function Pay(rental) {
+var IdRental = rental.id;
+for(var i=0; i<actors.length; i++) {
+    if(IdRental == actors[i].rentalId){
+        actors[i].payment[0].amount = rental.price;
+        actors[i].payment[1].amount = rental.price * 70/100;
+        actors[i].payment[2].amount = rental.commission.insurance;
+        actors[i].payment[3].amount = rental.commission.assistance;
+        actors[i].payment[4].amount = rental.commission.drivy;
+        if(rentals[i].options.deductibleReduction == true){
+            actors[i].payment[4].amount += 4 * Duration(rentals[i].pickupDate, rentals[i].returnDate);
+            }
+        }
+    }
+}
+//Pay each actor for all rentals
+function PayActors() {
+for(var i=0; i<rentals.length; i++) {
+    Pay(rentals[i]);
+    }
+}
+
 Price(); //Call the function Price
 Commission(); //Call the function Commission
 Deductible(); //Call the function Deductible
+PayActors(); //Call the function PayActor
 
 console.log(cars);
 console.log(rentals);
